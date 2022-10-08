@@ -52,7 +52,7 @@ public abstract class Bag {
         return this.color;
     }
 
-    public int getNumberofContents() {
+    public int getNumberOfContents() {
         return this.numberOfContents;
     }
 
@@ -106,7 +106,10 @@ public abstract class Bag {
      * @return
      */
     public String popItem() {
-        String lastItem = contents[this.numberOfContents];
+        if (this.numberOfContents == 0) {
+            return null;
+        }
+        String lastItem = contents[this.numberOfContents - 1];
         this.numberOfContents --;
         return lastItem;
     }
@@ -123,7 +126,7 @@ public abstract class Bag {
         this.capacity = this.capacity + n;
         String[] expandedContents = new String[this.capacity];
         for (int i = 0; i < this.capacity; i ++) {
-            if (i > this.capacity - n) {
+            if (i < this.capacity - n) {
                 expandedContents[i] = this.contents[i];
             } else {
                 expandedContents[i] = "";
